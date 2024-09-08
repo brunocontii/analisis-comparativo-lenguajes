@@ -120,30 +120,53 @@ local X in
 end
 ------------------------------------------------------------------------------------------------------
 EJERCICIO 6
-local Max in
-    local A in
-        local B in
-            local C in
-                Max = proc {$ X Y ? R}
-                    local T in
-                        T = X >= Y
-                        if T then
-                            R = X
+local Max in                                {s}
+    local A in                              {s1}
+        local B in                          {s2}
+            local C in                      {s3}
+                Max = proc {$ X Y ? R}      {s4}
+                    local T in              {s9}
+                        T = X >= Y          {s10}
+                        if T then           {s11}
+                            R = X           {s12}
                         else
-                            R = Y
+                            R = Y           {s13}
                         end
                     end
                 end
-                A = 3
-                B = 2
-                local Z in
-                    Z = {Max A B C}
-                    {Browse C}
+                A = 3                       {s5}
+                B = 2                       {s6}
+                local Z in                  {s7}
+                    Z = {Max A B C}         {s8}
+                    {Browse C}              {s14}
                 end
             end
         end
     end
 end
+
+([s, ∅], ∅)
+ejecuto s
+([(s1, {MAX -> max})], max)
+ejecuto s1
+([(s2, {MAX -> max, A -> a})], max, a)
+ejecuto s2
+([(s3, {MAX -> max, A -> a, B -> b})], max, a, b)
+ejecuto s3
+([(s4, s5, s6, s7, {MAX -> max, A -> a, B -> b, C -> c})], max, a, b, c)
+distribuyo
+([(s4, {MAX -> max, A -> a, B -> b, C -> c}), (s5, {MAX -> max, A -> a, B -> b, C -> c}), (s6, {MAX -> max, A -> a, B -> b, C -> c}), (s7, {MAX -> max, A -> a, B -> b, C -> c})], max, a, b, c)
+ejecuto s4 que es la definicion de un procedimiento
+([(s5, {MAX -> max, A -> a, B -> b, C -> c}), (s6, {MAX -> max, A -> a, B -> b, C -> c}), (s7, {MAX -> max, A -> a, B -> b, C -> c})], max = (proc...end, {T -> t}), a, b, c)
+ejecuto s5
+([(s6, {MAX -> max, A -> a, B -> b, C -> c}), (s7, {MAX -> max, A -> a, B -> b, C -> c})], max = (proc...end, {T -> t}), a = 3, b, c)
+ejecuto s6
+([(s7, {MAX -> max, A -> a, B -> b, C -> c})], max = (proc...end, {T -> t}), a = 3, b = 2, c)
+ejecuto s7
+([(s8, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, {T -> t}), a = 3, b = 2, c, z)
+ejecuto s8 que es la invocaciona un procedimiento
+([(s9, {X -> a, Y -> b, R -> c, T -> t})], max = (proc...end, {T -> t}), a = 3, b = 2, c, z)
+
 ------------------------------------------------------------------------------------------------------
 EJERCICIO 7
 ------------------------------------------------------------------------------------------------------
