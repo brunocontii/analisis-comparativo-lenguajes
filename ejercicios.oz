@@ -166,7 +166,7 @@ ejecuto s7
 ([(s8, s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z)
 distribuyo
 ([(s8, {MAX -> max, A -> a, B -> b, C -> c, Z -> z}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z)
-ejecuto s8 que es la invocaciona un procedimiento
+ejecuto s8 que es la invocaciona de un procedimiento
 ([(s9, {X -> a, Y -> b, R -> c}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z)
 ejecuto s9
 ([(s10, s11, {X -> a, Y -> b, R -> c, T -> t}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z, t)
@@ -184,6 +184,50 @@ se ejecuta el {Browse C} y se muestra un 3
 
 ------------------------------------------------------------------------------------------------------
 EJERCICIO 7
+local X in                                  {s}
+    X = 1                                   {s1}
+    local P in                              {s2}
+        P = proc {$ Y}                      {s3}
+            local P, A in                   {s5}
+                P = proc {$ Z}              {s6}
+                    Z = 10                  {s9}
+                end
+                {P A}                       {s7}
+                {Browse A + Y}              {s8}
+            end
+        end
+        {P X}                               {s4}
+    end
+end
+
+([s, ∅], ∅)
+ejecuto s
+([(s1, s2, {X -> x})], x)
+distribuyo
+([(s1, {X -> x}), (s2, {X -> x})], x)
+ejecuto s1
+([(s2, {X -> x})], x = 1)
+ejecuto s2
+([(s3, s4, {X -> x, P -> p})], x = 1, p)
+distribuyo
+([(s3, {X -> x, P -> p}), (s4, {X -> x, P -> p})], x = 1, p)
+ejecuto s3 que es la definicion de un procedimiento
+([(s4, {X -> x, P -> p})], x = 1, p = (proc...end, { }))
+ejecuto s4 que es la invocacion de un procedimiento
+([(s5, {Y -> x})], x = 1, p = (proc...end, { }))
+ejecuto s5
+([(s6, s7, s8, {Y -> x, P -> p2, A -> a})], x = 1, p = (proc...end, { }, p2, a))
+distribuyo
+([(s6, {Y -> x, P -> p2, A -> a}), (s7, {Y -> x, P -> p2, A -> a}), (s8, {Y -> x, P -> p2, A -> a})], x = 1, p = (proc...end, { }, p2, a))
+ejecuto s6 que es la definicion de un procedimiento
+([(s7, {Y -> x, P -> p2, A -> a}), (s8, {Y -> x, P -> p2, A -> a})], x = 1, p = (proc...end, { }, p2 = (proc...end, { }), a))
+ejecuto s7 que es la invocacion de un procedimiento
+([(s9, {Z -> a}), (s8, {Y -> x, P -> p2, A -> a})], x = 1, p = (proc...end, { }, p2 = (proc...end, { }), a))
+ejecuto s9
+([(s8, {Y -> x, P -> p2, A -> a})], x = 1, p = (proc...end, { }, p2 = (proc...end, { }), a = 10))
+ejecuto s8
+([({Browse A + Y}, {Y -> x, P -> p2, A -> a})], x = 1, p = (proc...end, { }, p2 = (proc...end, { }), a = 10))
+se ejecuta el {Browse A + Y} y muestra 11
 ------------------------------------------------------------------------------------------------------
 EJERCICIO 8
 ------------------------------------------------------------------------------------------------------
