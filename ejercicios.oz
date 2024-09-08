@@ -163,9 +163,24 @@ ejecuto s5
 ejecuto s6
 ([(s7, {MAX -> max, A -> a, B -> b, C -> c})], max = (proc...end, {T -> t}), a = 3, b = 2, c)
 ejecuto s7
-([(s8, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, {T -> t}), a = 3, b = 2, c, z)
+([(s8, s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z)
+distribuyo
+([(s8, {MAX -> max, A -> a, B -> b, C -> c, Z -> z}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z)
 ejecuto s8 que es la invocaciona un procedimiento
-([(s9, {X -> a, Y -> b, R -> c, T -> t})], max = (proc...end, {T -> t}), a = 3, b = 2, c, z)
+([(s9, {X -> a, Y -> b, R -> c}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z)
+ejecuto s9
+([(s10, s11, {X -> a, Y -> b, R -> c, T -> t}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z, t)
+distribuyo
+([(s10, {X -> a, Y -> b, R -> c, T -> t}), (s11, {X -> a, Y -> b, R -> c, T -> t}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z, t)
+ejecuto s10
+([(s11, {X -> a, Y -> b, R -> c, T -> t}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z, t = true)
+ejecuto s11
+([(s12, {X -> a, Y -> b, R -> c, T -> t}), (s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3, b = 2, c, z, t = true)
+ejecuto s12
+([(s14, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3 = c, b = 2, z, t = true)
+ejecuto s14
+([({Browse C}, {MAX -> max, A -> a, B -> b, C -> c, Z -> z})], max = (proc...end, { }), a = 3 = c, b = 2, z, t = true)
+se ejecuta el {Browse C} y se muestra un 3
 
 ------------------------------------------------------------------------------------------------------
 EJERCICIO 7
