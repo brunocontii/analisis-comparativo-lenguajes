@@ -25,7 +25,7 @@ end
 
 tira error ya que no tienen el mismo valor
 y ya tenian un valor asosiado
-    ------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
 EJERCICIO 3
 local X in                  {s}
     X = 1                   {s1}
@@ -230,6 +230,84 @@ ejecuto s8
 se ejecuta el {Browse A + Y} y muestra 11
 ------------------------------------------------------------------------------------------------------
 EJERCICIO 8
+local loop5 in                      {s}
+    loop5 = proc {$ I}              {s1}
+        local C in                  {s5}
+            C = I == 5              {s6}
+            if C then               {s7}
+                skip                {s8}
+            else
+                local J in          {s9}
+                    J = I + 5       {s10}
+                    {loop5 J}       {s11}
+                end
+            end
+        end
+    end
+    local A in                      {s2}
+        A = (-5)                    {s3}
+        {loop5 A}                   {s4}
+    end
+end
+
+([s, ∅], ∅)
+ejecuto s
+([(s1, s2, {loop5 -> l})], {l})
+distribuyo
+([(s1, {loop5 -> l}), (s2, {loop5 -> l})], {l})
+ejecuto s1 que es la definicion de un procedimiento
+([(s2, {loop5 -> l})], {l = (proc...end, { })})
+ejecuto s2
+([(s3, s4, {loop5 -> l, A -> a})], {l = (proc...end, { }), a})
+distribuyo
+([(s3, {loop5 -> l, A -> a}), (s4, {loop5 -> l, A -> a})], {l = (proc...end, { }), a})
+ejecuto s3
+([(s4, {loop5 -> l, A -> a})], {l = (proc...end, { }), a = (-5)})
+ejecuto s4 que es la invocacion de un procedimiento
+([(s5, {I -> a})], {l = (proc...end, { }), a = (-5)})
+ejecuto s5
+([(s6, s7, {I -> a, C -> c})], {l = (proc...end, { }), a = (-5), c})
+distribuyo
+([(s6, {I -> a, C -> c}), (s7, {I -> a, C -> c})], {l = (proc...end, { }), a = (-5), c})
+ejecuto s6
+([(s7, {I -> a, C -> c})], {l = (proc...end, { }), a = (-5), c = false})
+ejecuto s7
+([(s9, {I -> a, C -> c})], {l = (proc...end, { }), a = (-5), c = false})
+ejecuto s9
+([(s10, s11, {I -> a, C -> c, J -> j})], {l = (proc...end, { }), a = (-5), c = false, j})
+distribuyo
+([(s10, {I -> a, C -> c, J -> j}), (s11, {I -> a, C -> c, J -> j})], {l = (proc...end, { }), a = (-5), c = false, j})
+ejecuto s10
+([(s11, {I -> a, C -> c, J -> j})], {l = (proc...end, { }), a = (-5), c = false, j = 0})
+ejecuto s11 que es la invocacion de un procedimiento
+([(s5, {I -> j})], {l = (proc...end, { }), a = (-5), c = false, j = 0})
+ejecuto s5
+([(s6, s7, {I -> j, C -> c2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2})
+distribuyo
+([(s6, {I -> j, C -> c2}), (s7, {I -> j, C -> c2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2})
+ejecuto s6
+([(s7, {I -> j, C -> c2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false})
+ejecuto s7
+([(s9, {I -> j, C -> c2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false})
+ejecuto s9
+([(s10, s11, {I -> j, C -> c2, J -> j2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2})
+distribuyo
+([(s10, {I -> j, C -> c2, J -> j2}), (s11, {I -> j, C -> c2, J -> j2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2})
+ejecuto s10
+([(s11, {I -> j, C -> c2, J -> j2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2 = 5})
+ejecuto s11 que es la invocacion de un procedimiento
+([(s5, {I -> j2})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2 = 5})
+ejecuto s5
+([(s6, s7, {I -> j2, C -> c3})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2 = 5, c3})
+distribuyo
+([(s6, {I -> j2, C -> c3}), (s7, {I -> j2, C -> c3})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2 = 5, c3})
+ejecuto s6
+([(s7, {I -> j2, C -> c3})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2 = 5, c3 = true})
+ejecuto s7
+([(s8, {I -> j2, C -> c3})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2 = 5, c3 = true})
+ejecuto s8
+([(skip, {I -> j2, C -> c3})], {l = (proc...end, { }), a = (-5), c = false, j = 0, c2 = false, j2 = 5, c3 = true})
+se ejecuta el skip y termina
 ------------------------------------------------------------------------------------------------------
 EJERCICIO 9-a
 fun {Length Ls, r}
