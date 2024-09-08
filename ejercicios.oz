@@ -103,3 +103,59 @@ ejecuto s8
 ([({Browse X}, {X -> x, Y -> y, F -> f, P -> p})], {x = y = 1, f = (proc...end, {P -> p}), p = (proc...end, {Y -> y})})
 se ejecuta el {Browse X} y se muestra un 1
 ------------------------------------------------------------------------------------------------------
+EJERCICIO 5
+local X in
+    local Y in
+        X = 1
+        Y = 2 + X
+        local T in
+            T = X > Y
+            if T then
+                {Browse X}
+            else
+                {Browse Y}
+            end
+        end
+    end
+end
+------------------------------------------------------------------------------------------------------
+EJERCICIO 6
+local Max in
+    local A in
+        local B in
+            local C in
+                Max = proc {$ X Y ? R}
+                    local T in
+                        T = X >= Y
+                        if T then
+                            R = X
+                        else
+                            R = Y
+                        end
+                    end
+                end
+                A = 3
+                B = 2
+                local Z in
+                    Z = {Max A B C}
+                    {Browse C}
+                end
+            end
+        end
+    end
+end
+------------------------------------------------------------------------------------------------------
+EJERCICIO 9-a
+fun {Length Ls, r}
+    case Ls
+    of nil then r
+    [] _ | Lr then {Length Lr, (1 + r)}
+    end
+end
+
+
+
+
+
+
+
