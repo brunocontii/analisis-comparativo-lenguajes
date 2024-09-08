@@ -145,6 +145,10 @@ local Max in
     end
 end
 ------------------------------------------------------------------------------------------------------
+EJERCICIO 7
+------------------------------------------------------------------------------------------------------
+EJERCICIO 8
+------------------------------------------------------------------------------------------------------
 EJERCICIO 9-a
 fun {Length Ls, r}
     case Ls
@@ -163,7 +167,46 @@ inversa :: [a] -> [a] -> [a]
     | [] ys = ys
     | (x:xs) ys = inversa xs (concat ys [x])
 ------------------------------------------------------------------------------------------------------
-EJERCICIO 10
+EJERCICIO 10-a
+definicion de FoldR
+fun {FoldR L F N}
+    case L
+    of nil then N
+    [] x|xs then F(x) : {FoldR xs F N}
+    end
+end
+
+fun {SumList L}
+    {FoldR L fun {$ X Y} X + Y end 0}
+end
+
+fun {ProdList L}
+    {FoldR L fun {$ X Y} X * Y end 1}
+end
+------------------------------------------------------------------------------------------------------
+EJERCICIO 10-b
+fun {Some L}
+    {FoldR L fun {$ X Y} X orelse Y end false}
+end
+
+esta funcion es el v logico de una lista, devuelve true sii alguno de los elementos es true, caso contrario false
+------------------------------------------------------------------------------------------------------
+EJERCICIO 10-c
+------------------------------------------------------------------------------------------------------
+EJERCICIO 11
+fun lazy{Enteros N}
+    N | {Enteros N + 1}
+end
+
+caso en donde poder usarla
+imprime los 3 numeros siguientes al 5
+local L in
+    L = {Enteros 5}
+    case L of 
+    A|B|C|_ = {Browse A|B|C}
+    end
+end
+
 
 
 
