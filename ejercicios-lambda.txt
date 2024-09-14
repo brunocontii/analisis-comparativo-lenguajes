@@ -1,12 +1,47 @@
 DEFINICIONES
-def de fst -----> λp. pTRUE
-def de pair ----> λxyf. f x y
-def de 1 -----> λfx. f x
-def de 2 -----> λfx. f f x
-def de TRUE -----> λtf. t
-def de FALSE -----> λtf. f
-def de NOT -----> λpab. p b a
 
+Numerales de Church y aritmetica:
+0 ≡ λfx. x
+1 ≡ λfx. f x
+2 ≡ λfx. f (f x)
+...
+
+Función sucesor: SUCC ≡ λnfx. f (n f x)
+Suma: PLUS ≡ λmnfx. n f (m f x) o PLUS ≡ λmn. m SUCC n
+Multiplicación: MULT ≡ λmnf. m (n f) o PLUS ≡ λmn. m (PLUS n) 0
+
+Función predecesor: PRED ≡ λnfx. n (λgh. h (g f)) (λu. x) (λu. u)
+
+Operadores lógicos
+FALSE ≡ λtf. f (notar que es igual al cero)
+TRUE ≡ λtf. t
+AND ≡ λpq. p q p
+OR ≡ λpq. p p q
+NOT ≡ λpab. pba
+
+Pares: (f representaría el constructor del par)
+PAIR ≡ λxyf. f x y
+FST ≡ λp. p TRUE
+SND ≡ λp. p FALSE
+----------------------------------------------------
+EJERCICIO 1
+PLUS 1 2
+{def de PLUS, 1 y 2}
+(λmn. m SUCC n) (λfx. f x) (λfx. f f x)
+{def de SUCC}
+(λmn. m (λnfx. f (n f x)) n) (λfx. f x) (λfx. f f x)
+{en m (λnfx. f (n f x)) n reemplazo [m <- λfx. f x]}
+(λn. (λfx. f x) (λnfx. f (n f x)) n) (λfx. f f x)
+{en (λfx. f x) (λnfx. f (n f x)) n reemplazo [n <- λfx. f f x]}
+(λfx. f x) (λnfx. f (n f x)) (λfx. f f x)
+{en f x reemplazo [f <- λnfx. f (n f x)]}
+(λx. (λnfx. f (n f x)) x) (λfx. f f x)
+{en λnfx. f (n f x) x reemplazo [x <- λfx. f f x]}
+(λnfx. f (n f x) (λfx. f f x))
+{en f (n f x) reemplazo [n <- λfx. f f x]}
+(λfx. f ((λfx. f f x) f x))
+{en f (λfx. f f x) reemplazo [f <- f, x <- x]}
+(λfx. f f f x) ≡ 3
 ----------------------------------------------------
 ORDEN NORMAL
 fst (pair 1 2)
