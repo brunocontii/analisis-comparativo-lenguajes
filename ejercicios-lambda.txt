@@ -1,0 +1,73 @@
+DEFINICIONES
+def de fst -----> λp. pTRUE
+def de pair ----> λxyf. f x y
+def de 1 -----> λfx. f x
+def de 2 -----> λfx. f f x
+def de TRUE -----> λtf. t
+def de FALSE -----> λtf. f
+def de NOT -----> λpab. p b a
+
+----------------------------------------------------
+ORDEN NORMAL
+fst (pair 1 2)
+{def de fst}
+λp. p TRUE (pair 1 2)
+{en p TRUE reemplazo [p <- pair 1 2]}
+pair 1 2 TRUE
+{def de pair}
+(λxyf. f x y) 1 2 TRUE
+{en f x y reemplazo [x <- 1]}
+(λyf. f 1 y) 2 TRUE
+{en f 1 y reemplazo [y <- 2]}
+(λf. f 1 2) TRUE
+{en f 1 2 reemplazo [f <- TRUE]}
+TRUE 1 2
+{def de TRUE}
+(λtf. t) 1 2
+{en t reemplazo [t <- 1]}
+(λf. 1)
+{siempre va a dar de valor 1}
+1
+
+----------------------------------------------------
+ORDEN APLICATIVO
+fst (pair 1 2)
+{def de pair}
+fst ((λxyf. f x y) 1 2)
+{en f x y reemplazo [x <- 1]}
+fst (λyf. f 1 y) 2
+{en f 1 2 reemplazo [y <- 2]}
+fst (λf. f 1 2)
+{def de fst}
+(λ.p p TRUE) (λf. f 1 2)
+{en p TRUE reemplazo [p <- λf. f 1 2]}
+(λf. f 1 2) TRUE
+{en f 1 2 reemplazo [f <- TRUE]}
+TRUE 1 2
+{def de TRUE}
+(λtf. t) 1 2
+{en t reemplazo [t <- 1]}
+(λf. 1)
+{siempre va a dar de valor 1}
+1
+
+----------------------------------------------------
+NOT (TRUE)
+{def de NOT}
+(λpab. p b a) TRUE
+{en p b a reemplazo [p <- TRUE]}
+λab. TRUE b a
+{def de TRUE}
+(λab. (λtf. t) b a)
+{en t reemplazo [t <- b]}
+λab. (λf b) a
+{en b reemplazo [f <- a]}
+λab. b
+{es equivalente}
+λtf. f
+
+----------------------------------------------------
+
+
+
+
