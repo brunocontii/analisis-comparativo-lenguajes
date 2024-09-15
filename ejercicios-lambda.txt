@@ -99,10 +99,24 @@ NOT (TRUE)
 {en b reemplazo [f <- a]}
 λab. b
 {es equivalente}
-λtf. f
+λtf. f ≡ FALSE
 
 ----------------------------------------------------
+NOT (NOT (TRUE))
+{def de ejercicio anterior [NOT (TRUE) ≡ λtf. f]}
+NOT (λtf. f)
+{def de NOT}
+λpab. p b a (λtf. f)
+{en p b a reemplazo [p <- λtf. f]}
+λab. (λtf. f) b a
+{en f reemplazo [t <- b]}
+λab. (λf. f) a
+{en f reemplazo [f <- a]}
+λab. a
+{es equivalente}
+λtf. t ≡ TRUE
 
+----------------------------------------------------
 
 
 
