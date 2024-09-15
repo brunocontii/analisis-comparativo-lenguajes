@@ -137,9 +137,25 @@ yy
 EJERCICIO 3-c
 la estrategia mas eficiente es la aplicativa ya que realiza menos pasos
 ----------------------------------------------------
-
-
-
+EJERCICIO 4-a ORDEN NORMAL
+(λu. u u) ((λx. x) (λx. x))
+{en u u reemplazo [u <- ((λx. x) (λx. x))]}
+((λx. x) (λx. x)) ((λx. x) (λx. x))
+{en x reemplazo [x <- λx. x]}
+λx. x ((λx. x) (λx. x))
+{en x reemplazo [x <- ((λx. x) (λx. x))]}
+((λx. x) (λx. x))
+{en x reemplazo [x <- λx. x]}
+λx. x
+----------------------------------------------------
+EJERCICIO 4-b ORDEN APLICATIVO
+(λu. u u) ((λx. x) (λx. x))
+{en x reemplazo [x <- λx. x]}
+(λu. u u) (λx. x)
+{en u u reemplazo [u <- λx. x]}
+(λx. x) (λx. x)
+{en x reemplazo [x <- λx. x]}
+λx. x
 
 
 
