@@ -63,7 +63,6 @@ TRUE 1 2
 (λf. 1)
 {siempre va a dar de valor 1}
 1
-
 ----------------------------------------------------
 ORDEN APLICATIVO
 fst (pair 1 2)
@@ -85,7 +84,6 @@ TRUE 1 2
 (λf. 1)
 {siempre va a dar de valor 1}
 1
-
 ----------------------------------------------------
 NOT (TRUE)
 {def de NOT}
@@ -100,7 +98,6 @@ NOT (TRUE)
 λab. b
 {es equivalente}
 λtf. f ≡ FALSE
-
 ----------------------------------------------------
 NOT (NOT (TRUE))
 {def de ejercicio anterior [NOT (TRUE) ≡ λtf. f]}
@@ -115,8 +112,35 @@ NOT (λtf. f)
 λab. a
 {es equivalente}
 λtf. t ≡ TRUE
-
 ----------------------------------------------------
+EJERCICIO 2
+if ≡ λc. λs1. λs2. c s1 s2
+----------------------------------------------------
+EJERCICIO 3-a
+ORDEN NORMAL
+(λx. x x) ((λx. x) y)
+{en x x reemplazo [x <- (λx. x) y]}
+((λx. x) y) ((λx. x) y)
+{en x reemplazo [x <- y]}
+y ((λx. x) y)
+{en x reemplazo [x <- y]}
+yy
+----------------------------------------------------
+EJERCICIO 3-b
+ORDEN APLICATIVO
+(λx. x x) ((λx. x) y)
+{en x reemplazo [x <- y]}
+(λx. x x) y
+{en x x reemplazo [x <- y]}
+yy
+----------------------------------------------------
+EJERCICIO 3-c
+la estrategia mas eficiente es la aplicativa ya que realiza menos pasos
+----------------------------------------------------
+
+
+
+
 
 
 
